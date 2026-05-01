@@ -1,7 +1,25 @@
 package cipher;
 
-public class RailFenceCipher {
-    public static String encrypt(String text, int rails) {
+public class RailFenceCipher implements Cipher {
+
+    @Override
+    public String encrypt(String plaintext, String key) {
+        int rails = Integer.parseInt(key);
+        return encrypt(plaintext, rails);
+    }
+
+    @Override
+    public String decrypt(String ciphertext, String key) {
+        int rails = Integer.parseInt(key);
+        return decrypt(ciphertext, rails);
+    }
+
+    @Override
+    public String getName() {
+        return "Rail Fence Cipher";
+    }
+
+    public String encrypt(String text, int rails) {
         if (rails <= 1) return text; 
 
         StringBuilder[] rail = new StringBuilder[rails];
@@ -28,7 +46,7 @@ public class RailFenceCipher {
         return result.toString();
     }
 
-    public static String decrypt(String text, int rails) {
+    public String decrypt(String text, int rails) {
         if (rails <= 1) return text; 
 
         boolean[][] mark = new boolean[rails][text.length()];

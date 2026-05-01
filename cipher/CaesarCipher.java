@@ -1,7 +1,24 @@
 package cipher;
-public class CaesarCipher {
+public class CaesarCipher implements Cipher {
 
-    public static String encrypt(String text, int shift) {
+    @Override
+    public String encrypt(String text, String key) {
+        int shift = Integer.parseInt(key);
+        return encrypt(text, shift);
+    }
+
+    @Override
+    public String decrypt(String text, String key) {
+        int shift = Integer.parseInt(key);
+        return decrypt(text, shift);
+    }
+
+    @Override
+    public String getName() {
+        return "Caesar Cipher";
+    }
+
+    public String encrypt(String text, int shift) {
         StringBuilder result = new StringBuilder();
         for (char c : text.toCharArray()) {
             if (Character.isUpperCase(c)) {
@@ -17,7 +34,7 @@ public class CaesarCipher {
         return result.toString();
     }
 
-    public static String decrypt(String text, int shift) {
+    public String decrypt(String text, int shift) {
         return encrypt(text, 26 - (shift % 26));
     }
 }

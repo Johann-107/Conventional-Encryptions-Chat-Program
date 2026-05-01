@@ -1,6 +1,8 @@
 package cipher;
-public class VigenereCipher {
-    public static String encrypt(String text, String keyword) {
+public class VigenereCipher implements Cipher {
+    
+    @Override
+    public String encrypt(String text, String keyword) {
         StringBuilder result = new StringBuilder();
         int keywordLength = keyword.length();
         int keywordIndex = 0;
@@ -23,7 +25,8 @@ public class VigenereCipher {
         return result.toString();
     }
 
-    public static String decrypt(String text, String keyword) {
+    @Override
+    public String decrypt(String text, String keyword) {
         StringBuilder result = new StringBuilder();
         int keywordLength = keyword.length();
         int keywordIndex = 0;
@@ -44,5 +47,10 @@ public class VigenereCipher {
             }
         }
         return result.toString();
+    }
+
+    @Override
+    public String getName() {
+        return "Vigenère Cipher";
     }
 }
