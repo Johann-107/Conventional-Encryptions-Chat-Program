@@ -4,7 +4,6 @@ import cipher.Cipher;
 import cipher.CaesarCipher;
 import cipher.VigenereCipher;
 import cipher.RailFenceCipher;
-import cipher.PlayfairCipher;
 import model.ChatMessage;
 
 import javax.swing.*;
@@ -20,21 +19,19 @@ public class ChatWindow extends JFrame {
     private static final Color BG_PANEL     = new Color(13, 21, 32);
     private static final Color BG_INPUT     = new Color(6, 13, 18);
     private static final Color GREEN_BRIGHT = new Color(57, 255, 106);
-    private static final Color GREEN_MID    = new Color(122, 204, 122);
     private static final Color GREEN_DIM    = new Color(90, 138, 90);
     private static final Color ORANGE_ENC   = new Color(255, 170, 68);
     private static final Color BLUE_DEC     = new Color(68, 170, 255);
     private static final Color BORDER_COLOR = new Color(26, 58, 42);
 
-    private static final Font MONO_FONT    = new Font("Monospaced", Font.PLAIN, 13);
-    private static final Font LABEL_FONT   = new Font("Monospaced", Font.PLAIN, 11);
-    private static final Font TITLE_FONT   = new Font("Monospaced", Font.BOLD, 16);
+    private static final Font MONO_FONT  = new Font("Monospaced", Font.PLAIN, 13);
+    private static final Font LABEL_FONT = new Font("Monospaced", Font.PLAIN, 11);
+    private static final Font TITLE_FONT = new Font("Monospaced", Font.BOLD, 16);
 
     private final Cipher[] ciphers = {
         new CaesarCipher(),
         new VigenereCipher(),
-        new RailFenceCipher(),
-        new PlayfairCipher()
+        new RailFenceCipher()
     };
     private Cipher selectedCipher = ciphers[0];
 
@@ -158,7 +155,6 @@ public class ChatWindow extends JFrame {
         panel.add(msgScroll);
         panel.add(Box.createVerticalStrut(10));
 
-        // Send button
         JButton sendBtn = new JButton("▶  ENCRYPT & SEND");
         sendBtn.setFont(new Font("Monospaced", Font.BOLD, 12));
         sendBtn.setBackground(new Color(10, 58, 26));
@@ -245,7 +241,6 @@ public class ChatWindow extends JFrame {
         String key     = keyField.getText().trim();
         String sender  = senderField.getText().trim();
 
-        // Validation
         if (message.isEmpty()) {
             showError("Please enter a message.");
             return;
@@ -294,7 +289,7 @@ public class ChatWindow extends JFrame {
 
     private void appendToChat(ChatMessage msg) {
         if (chatHistory.size() == 1) {
-            chatArea.setText(""); // clear placeholder
+            chatArea.setText("");
         }
         chatArea.append(msg.toDisplayString());
         chatArea.setCaretPosition(chatArea.getDocument().getLength());
@@ -314,17 +309,17 @@ public class ChatWindow extends JFrame {
     private void highlightCipherButton(int activeIdx) {
         for (int i = 0; i < cipherButtons.length; i++) {
             if (i == activeIdx) {
-                cipherButtons[i].setBackground(new Color(10, 42, 20));
-                cipherButtons[i].setForeground(GREEN_BRIGHT);
+                cipherButtons[i].setBackground(new Color(50, 28, 5));
+                cipherButtons[i].setForeground(new Color(255, 160, 40));
                 cipherButtons[i].setBorder(new CompoundBorder(
-                    new LineBorder(GREEN_BRIGHT),
+                    new LineBorder(new Color(255, 160, 40)),
                     new EmptyBorder(6, 10, 6, 10)
                 ));
             } else {
-                cipherButtons[i].setBackground(BG_PANEL);
-                cipherButtons[i].setForeground(GREEN_MID);
+                cipherButtons[i].setBackground(new Color(30, 18, 8));
+                cipherButtons[i].setForeground(new Color(180, 100, 30));
                 cipherButtons[i].setBorder(new CompoundBorder(
-                    new LineBorder(BORDER_COLOR),
+                    new LineBorder(new Color(80, 45, 10)),
                     new EmptyBorder(6, 10, 6, 10)
                 ));
             }
@@ -370,12 +365,12 @@ public class ChatWindow extends JFrame {
     private JButton makeCipherButton(String text) {
         JButton btn = new JButton(text);
         btn.setFont(MONO_FONT);
-        btn.setBackground(BG_PANEL);
-        btn.setForeground(GREEN_MID);
+        btn.setBackground(new Color(30, 18, 8));
+        btn.setForeground(new Color(180, 100, 30));
         btn.setHorizontalAlignment(SwingConstants.LEFT);
         btn.setFocusPainted(false);
         btn.setBorder(new CompoundBorder(
-            new LineBorder(BORDER_COLOR),
+            new LineBorder(new Color(80, 45, 10)),
             new EmptyBorder(6, 10, 6, 10)
         ));
         btn.setAlignmentX(Component.LEFT_ALIGNMENT);
